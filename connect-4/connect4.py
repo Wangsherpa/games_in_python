@@ -15,14 +15,10 @@ def drawBoard(field):
             for column in range(13):
                 if column % 2 == 0:
                     practicalColumn = int(column/2)
-                    if field[practicalColumn][practicalRow] == 'X':
-                        color = 'red'
-                    else:
-                        color = 'yellow'
                     if column == 12:
-                        cprint(field[practicalColumn][practicalRow], color, attrs=['bold'], file=sys.stderr)
+                        print(field[practicalColumn][practicalRow])
                     else:
-                        cprint(field[practicalColumn][practicalRow], color, attrs=['bold'], file=sys.stderr, end='')
+                        print(field[practicalColumn][practicalRow], end='')
                 else:
                     cprint("|", 'blue', end="")
         else:
@@ -83,7 +79,12 @@ while True:
         cprint("Player turn: 2", "yellow")
 
     if Player == 1:
-        column = int(input("Please enter the column number:(0 t0 6) "))
+        column = None
+        while column is None:
+            try:
+                column = int(input("Please enter the column number:(0 t0 6) "))
+            except:
+                pass
         if column < 7 and column >=0:
             for i in range(1, 7):
                 if currentField[column][-i] == ' ':
